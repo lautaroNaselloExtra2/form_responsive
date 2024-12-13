@@ -17,7 +17,7 @@ class ProfileStreamValidator {
   Stream<bool> get profileSaveStream =>
       Rx.combineLatest3(usernameStream, passwordStream, emailStream, (a, b, c) {
         return a != '' && b != '' && c != '';
-      }).startWith(true);
+      });
 
   Function(String) get changeUsername => usernameController.sink.add;
   Function(String) get changePassword => passwordController.sink.add;

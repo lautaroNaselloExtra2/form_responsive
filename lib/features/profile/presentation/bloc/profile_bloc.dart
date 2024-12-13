@@ -23,7 +23,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final failOrProfile = await getProfileUseCase.call();
     failOrProfile.when(
         left: (failure) => emit(ProfileError(messageError: failure.message)),
-        right: (user) => emit(ProfileLoaded()));
+        right: (user) => emit(ProfileLoaded(user: user)));
   }
 
   FutureOr<void> _onSaveProfileEvent(

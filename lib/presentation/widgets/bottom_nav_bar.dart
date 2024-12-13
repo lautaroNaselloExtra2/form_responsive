@@ -13,22 +13,23 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppResponsive.isMobile(context)
-        ? BottomNavigationBar(
-            currentIndex: selectedIndex,
-            onTap: onItemTapped,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Cambiar Perfil',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'Nueva Inscripción',
-              ),
-            ],
-          )
-        : const SizedBox
-            .shrink(); // No muestra la barra en pantallas grandes (web)
+    return AppResponsive.adaptiveBuilder(
+      context: context,
+      mobile: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Cambiar Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Nueva Inscripción',
+          ),
+        ],
+      ),
+      web: const SizedBox.shrink(),
+    );
   }
 }

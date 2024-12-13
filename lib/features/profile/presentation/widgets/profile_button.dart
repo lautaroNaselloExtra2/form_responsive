@@ -3,7 +3,7 @@ import 'package:form_responsive/core/constants/app_styles.dart';
 import 'package:form_responsive/core/utils/validators/profile_stream_validator.dart';
 
 class ProfileButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final Function(BuildContext context) onPressed;
   final ProfileStreamValidator profileStreamValidator;
 
   const ProfileButton({
@@ -17,10 +17,14 @@ class ProfileButton extends StatelessWidget {
     return StreamBuilder<bool>(
         stream: profileStreamValidator.profileSaveStream,
         builder: (context, snapshot) {
-          final hasErrors = snapshot.hasError && snapshot.data != null;
+          final isActiveBtn = snapshot.data == true;
           return ElevatedButton(
-            onPressed: !hasErrors ? onPressed : null,
-            style: !hasErrors
+            onPressed: isActiveBtn
+                ? () {
+                    onPressed(context);
+                  }
+                : null,
+            style: isActiveBtn
                 ? AppStyles.activeButtonStyle
                 : AppStyles.disabledButtonStyle,
             child: const Text(

@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
-  void _setUserValues() {
+  void _setUserValues(BuildContext context) {
     _profileStreamValidator.changeUsername(_profileStreamValidator.user);
     _profileStreamValidator.changePassword(_profileStreamValidator.pass);
     _profileStreamValidator.changeEmail(_profileStreamValidator.email);

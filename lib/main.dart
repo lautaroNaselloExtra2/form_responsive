@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_responsive/app.dart';
 import 'package:form_responsive/config/app_config_get_it.dart';
 import 'package:form_responsive/core/constants/app_colors.dart';
 import 'package:form_responsive/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:form_responsive/presentation/pages/home_page.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           getProfileUseCase: GetIt.instance.get(),
           saveProfileUseCase: GetIt.instance.get(),
         ),
-        child: const HomePage(),
+        child: const AppPage(),
       ),
     );
   }

@@ -14,6 +14,9 @@ class AppStrings {
   static const passwordHint = 'Contraseña';
   static const saveProfileSuccess = 'Perfil guardado exitosamente.';
 
+  // Profile Screen Detail
+  static const profileTitleCreate = 'Cambiar Perfil';
+
   // Inscription Screen
   static const inscriptionsTitle = 'Inscripciones';
   static const noInscriptions = 'No hay inscripciones registradas.';
