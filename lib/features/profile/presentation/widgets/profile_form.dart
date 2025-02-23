@@ -1,10 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:form_responsive/core/utils/validators/profile_stream_validator.dart';
 
-class ProfileForm extends StatelessWidget {
+class ProfileForm extends StatefulWidget {
   final ProfileStreamValidator profileStreamValidator;
-  const ProfileForm({super.key, required this.profileStreamValidator});
 
+  final TextEditingController usernameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  const ProfileForm(
+      {super.key,
+      required this.profileStreamValidator,
+      required this.usernameController,
+      required this.emailController,
+      required this.passwordController});
+
+  @override
+  State<ProfileForm> createState() => _ProfileFormState();
+}
+
+class _ProfileFormState extends State<ProfileForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -12,19 +26,20 @@ class ProfileForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           StreamBuilder(
-              stream: profileStreamValidator.usernameStream,
+              stream: widget.profileStreamValidator.usernameStream,
               builder: (context, snapshot) {
                 return Column(
                   children: [
                     CupertinoTextField(
+                      controller: widget.usernameController,
                       keyboardType: TextInputType.name,
                       placeholder: 'Nombre de usuario',
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemFill,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      onChanged: (userValue) =>
-                          profileStreamValidator.changeUsername(userValue),
+                      onChanged: (userValue) => widget.profileStreamValidator
+                          .changeUsername(userValue),
                     ),
                     if (snapshot.hasError)
                       Padding(
@@ -40,11 +55,12 @@ class ProfileForm extends StatelessWidget {
               }),
           const SizedBox(height: 16),
           StreamBuilder(
-              stream: profileStreamValidator.emailStream,
+              stream: widget.profileStreamValidator.emailStream,
               builder: (context, snapshot) {
                 return Column(
                   children: [
                     CupertinoTextField(
+                      controller: widget.emailController,
                       placeholder: 'Email',
                       keyboardType: TextInputType.emailAddress,
                       decoration: BoxDecoration(
@@ -52,7 +68,7 @@ class ProfileForm extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       onChanged: (emailValue) =>
-                          profileStreamValidator.changeEmail(emailValue),
+                          widget.profileStreamValidator.changeEmail(emailValue),
                     ),
                     if (snapshot.hasError)
                       Padding(
@@ -68,19 +84,21 @@ class ProfileForm extends StatelessWidget {
               }),
           const SizedBox(height: 16),
           StreamBuilder(
-              stream: profileStreamValidator.passwordStream,
+              stream: widget.profileStreamValidator.passwordStream,
               builder: (context, snapshot) {
                 return Column(
                   children: [
                     CupertinoTextField(
+                      controller: widget.passwordController,
                       placeholder: 'Password',
                       obscureText: true,
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemFill,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      onChanged: (passwordValue) =>
-                          profileStreamValidator.changePassword(passwordValue),
+                      onChanged: (passwordValue) => widget
+                          .profileStreamValidator
+                          .changePassword(passwordValue),
                     ),
                     if (snapshot.hasError)
                       Padding(

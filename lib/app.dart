@@ -23,8 +23,8 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     // Pantallas disponibles según el índice seleccionado
     final List<Widget> pages = [
-      const ProfileDetailPage(),
       const HomePage(),
+      const ProfileDetailPage(),
       const Placeholder(),
     ];
 
@@ -59,7 +59,7 @@ class _AppPageState extends State<AppPage> {
               title: const Text('Home'),
               onTap: () {
                 Navigator.pop(context); // Cierra el Drawer
-                _onItemTapped(1);
+                _onItemTapped(0);
               },
             ),
             ListTile(
@@ -67,7 +67,7 @@ class _AppPageState extends State<AppPage> {
               title: const Text(AppStrings.profileTitle),
               onTap: () {
                 Navigator.pop(context); // Cierra el Drawer
-                _onItemTapped(0);
+                _onItemTapped(1);
               },
             ),
             ListTile(
